@@ -1,4 +1,4 @@
-[gd_scene load_steps=10 format=3 uid="uid://bkr2bq1l3qpe8"]
+[gd_scene load_steps=7 format=3 uid="uid://bkr2bq1l3qpe8"]
 
 [ext_resource type="Script" path="res://code/cookie.gd" id="1_5v0cm"]
 [ext_resource type="Shader" path="res://shaders/outline.gdshader" id="2_olmpp"]
@@ -16,70 +16,18 @@ albedo_color = Color(0.233173, 0.68487, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_054an"]
 
-[sub_resource type="SphereShape3D" id="SphereShape3D_jcf1b"]
+[sub_resource type="CylinderShape3D" id="CylinderShape3D_7jomp"]
+height = 0.0887956
+radius = 0.107071
 
-[sub_resource type="Shader" id="Shader_c7dm5"]
-code = "shader_type spatial;
-uniform vec4 color = vec4(1.0);
-uniform float diameter = 1.0; // Circle Diameter
-uniform float thickness = 0.05; // Outline thickness
-uniform float frequency = 10.0; // Controls the number of dots
-uniform float phase = 0.0; // Controls the rotation of the circle
-
-void fragment() {
-  vec2 pos = UV - vec2(0.5);
-  float outer_radius = diameter / 2.0;
-  float inner_radius = outer_radius - thickness;
-  float outer_circle = step(length(pos), outer_radius);
-  float inner_circle = step(length(pos), inner_radius);
-
-
-  float angle = atan(pos.y, pos.x);
-  if (angle < 0.0) {
-    angle += 2.0 * PI;
-  }
-
-  float wave = 0.5 * sin(frequency * angle + phase) + 0.5;
-
-
-  float ring = outer_circle - inner_circle;
-  ring *= step(0.5, wave);
-
-  ALBEDO = vec3(color.rgb);
-  ALPHA  = ring * color.a;
-}"
-
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_xeham"]
-render_priority = 0
-shader = SubResource("Shader_c7dm5")
-shader_parameter/color = Vector4(1, 1, 0, 1)
-shader_parameter/diameter = 1.0
-shader_parameter/thickness = 0.01
-shader_parameter/frequency = 10.0
-shader_parameter/phase = 0.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_55cxh"]
-
-[node name="cookie" type="Node3D"]
+[node name="cookie" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66071, 0, -0.420867)
 script = ExtResource("1_5v0cm")
 
 [node name="model" type="MeshInstance3D" parent="."]
-transform = Transform3D(0.1, 0, 0, 0, 0.16, 0, 0, 0, 0.1, -0.00400138, 0.0396674, 0.0368596)
+transform = Transform3D(0.1, 0, 0, 0, 0.16, 0, 0, 0, 0.1, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_3ov0k")
 mesh = SubResource("TorusMesh_054an")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="."]
-lock_rotation = true
-freeze = true
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="RigidBody3D"]
-shape = SubResource("SphereShape3D_jcf1b")
-disabled = true
-
-[node name="interest_radius" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.01, 0)
-material_override = SubResource("ShaderMaterial_xeham")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_55cxh")
-skeleton = NodePath("../../../nest")
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+shape = SubResource("CylinderShape3D_7jomp")
