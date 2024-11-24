@@ -1,6 +1,7 @@
-[gd_scene load_steps=3 format=3 uid="uid://cv10fetsghija"]
+[gd_scene load_steps=4 format=3 uid="uid://cv10fetsghija"]
 
 [ext_resource type="Script" path="res://code/options.gd" id="1_gsnwx"]
+[ext_resource type="FontFile" uid="uid://c1xu111xh4c70" path="res://art/yikes.ttf" id="2_3mqy1"]
 
 [sub_resource type="LabelSettings" id="LabelSettings_3r8k8"]
 outline_size = 5
@@ -14,6 +15,13 @@ anchor_bottom = 1.0
 grow_horizontal = 2
 grow_vertical = 2
 script = ExtResource("1_gsnwx")
+
+[node name="Panel" type="Panel" parent="."]
+layout_mode = 0
+offset_left = 441.0
+offset_top = 237.0
+offset_right = 711.0
+offset_bottom = 409.0
 
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
@@ -29,32 +37,44 @@ offset_bottom = 63.5
 grow_horizontal = 2
 grow_vertical = 2
 
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
+text = "CONTROLES"
+label_settings = SubResource("LabelSettings_3r8k8")
+horizontal_alignment = 1
+
 [node name="Label" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
 text = "Movimiento: WASD"
 label_settings = SubResource("LabelSettings_3r8k8")
+horizontal_alignment = 1
 
 [node name="Label2" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
 text = "Saltar: Espacio"
 label_settings = SubResource("LabelSettings_3r8k8")
+horizontal_alignment = 1
 
 [node name="Label3" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
 text = "Empujar / Recoger Comida: E"
 label_settings = SubResource("LabelSettings_3r8k8")
+horizontal_alignment = 1
 
 [node name="Label4" type="Label" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
 text = "Colocar Comida: F"
 label_settings = SubResource("LabelSettings_3r8k8")
-
-[node name="Label5" type="Label" parent="VBoxContainer"]
-layout_mode = 2
-label_settings = SubResource("LabelSettings_3r8k8")
+horizontal_alignment = 1
 
 [node name="back" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_fonts/font = ExtResource("2_3mqy1")
 text = "Cerrar"
 
 [connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]

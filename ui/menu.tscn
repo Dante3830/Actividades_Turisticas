@@ -1,6 +1,17 @@
-[gd_scene load_steps=2 format=3 uid="uid://dxlh2crgr5w8g"]
+[gd_scene load_steps=7 format=3 uid="uid://dxlh2crgr5w8g"]
 
 [ext_resource type="Script" path="res://code/menu.gd" id="1_nxuxk"]
+[ext_resource type="Texture2D" uid="uid://c4exwx6aej4od" path="res://art/TuristaNoDeseado.png" id="2_ykc5o"]
+[ext_resource type="FontFile" uid="uid://c1xu111xh4c70" path="res://art/yikes.ttf" id="3_pd2hb"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_4ulft"]
+bg_color = Color(0, 0.811765, 0.709804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_rdjnu"]
+bg_color = Color(0, 0.811765, 0.709804, 1)
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_mj025"]
+bg_color = Color(0.996078, 0.654902, 0.0705882, 1)
 
 [node name="Menu" type="Control"]
 layout_mode = 3
@@ -20,27 +31,58 @@ grow_horizontal = 2
 grow_vertical = 2
 color = Color(0.440336, 0.440336, 0.440336, 1)
 
+[node name="Sprite2D" type="Sprite2D" parent="."]
+position = Vector2(585, 258)
+texture = ExtResource("2_ykc5o")
+
 [node name="VBoxContainer" type="VBoxContainer" parent="."]
 layout_mode = 1
-anchors_preset = 2
+anchors_preset = 7
+anchor_left = 0.5
 anchor_top = 1.0
+anchor_right = 0.5
 anchor_bottom = 1.0
-offset_left = 53.0
+offset_left = -80.0
 offset_top = -190.0
-offset_right = 213.0
+offset_right = 80.0
+grow_horizontal = 2
 grow_vertical = 0
 alignment = 1
 
 [node name="start" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.815686, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0.654902, 0.0705882, 1)
+theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pd2hb")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ulft")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rdjnu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj025")
 text = "Jugar"
 
 [node name="options" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.815686, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0.654902, 0.0705882, 1)
+theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pd2hb")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ulft")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rdjnu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj025")
 text = "Controles"
 
 [node name="quit" type="Button" parent="VBoxContainer"]
 layout_mode = 2
+theme_override_colors/font_hover_color = Color(0.815686, 0, 0, 1)
+theme_override_colors/font_pressed_color = Color(0.996078, 0.654902, 0.0705882, 1)
+theme_override_colors/font_color = Color(0.815686, 0, 0, 1)
+theme_override_fonts/font = ExtResource("3_pd2hb")
+theme_override_font_sizes/font_size = 30
+theme_override_styles/hover = SubResource("StyleBoxFlat_4ulft")
+theme_override_styles/pressed = SubResource("StyleBoxFlat_rdjnu")
+theme_override_styles/normal = SubResource("StyleBoxFlat_mj025")
 text = "Salir"
 
 [connection signal="pressed" from="VBoxContainer/start" to="." method="_on_start_pressed"]
