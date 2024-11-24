@@ -1,4 +1,6 @@
-[gd_scene load_steps=7 format=3 uid="uid://d1eo7qppu2wee"]
+[gd_scene load_steps=10 format=3 uid="uid://d1eo7qppu2wee"]
+
+[ext_resource type="VoxelGIData" uid="uid://blkgn1yn25jat" path="res://Room.VoxelGI_data.res" id="1_r86ac"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kw80l"]
 size = Vector3(300, 110, 1)
@@ -15,7 +17,17 @@ size = Vector2(300, 180)
 [sub_resource type="BoxMesh" id="BoxMesh_75oes"]
 size = Vector3(10, 10, 10)
 
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_lxd07"]
+emission_enabled = true
+emission = Color(1, 1, 1, 1)
+emission_energy_multiplier = 16.0
+
 [sub_resource type="BoxMesh" id="BoxMesh_fh6rp"]
+material = SubResource("StandardMaterial3D_lxd07")
+size = Vector3(80, 80, 80)
+
+[sub_resource type="Environment" id="Environment_1e0pi"]
+background_mode = 1
 
 [node name="Room" type="Node3D"]
 
@@ -62,5 +74,13 @@ spot_range = 60.8719
 spot_angle = 44.7736
 
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.0048, -20.343)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 29.279, -8.27592, -108.078)
 mesh = SubResource("BoxMesh_fh6rp")
+
+[node name="WorldEnvironment" type="WorldEnvironment" parent="."]
+environment = SubResource("Environment_1e0pi")
+
+[node name="VoxelGI" type="VoxelGI" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -14.673, 15.1783, -37.7445)
+size = Vector3(1085.14, 542.677, 631.818)
+data = ExtResource("1_r86ac")
