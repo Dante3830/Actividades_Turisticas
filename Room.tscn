@@ -99,23 +99,23 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -261.873, -92.9777, 164.909)
 mesh = SubResource("BoxMesh_do4bp")
 
 [node name="Box1" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -151.603, 156.982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -60.2717, -151.603, 156.982)
 mesh = SubResource("BoxMesh_gl46p")
 
 [node name="Box2" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3268, -71.9824, 156.982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -26.9449, -71.9824, 156.982)
 mesh = SubResource("BoxMesh_gl46p")
 
 [node name="Box3" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.262, 7.6848, 156.982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 14.9903, 7.6848, 156.982)
 mesh = SubResource("BoxMesh_gl46p")
 
 [node name="Box4" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.978, -151.538, 156.982)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 50.7063, -151.538, 156.982)
 mesh = SubResource("BoxMesh_gl46p")
 
 [node name="Cilinter" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, -0.00977374, 0.999952, 0, -0.999952, -0.00977374, 203.803, 103.706, 164.959)
+transform = Transform3D(1, 0, 0, 0, -0.00977374, 0.999952, 0, -0.999952, -0.00977374, 167.725, 103.706, 164.959)
 mesh = SubResource("CylinderMesh_n3roy")
 
 [node name="Cilinter2" type="MeshInstance3D" parent="."]
