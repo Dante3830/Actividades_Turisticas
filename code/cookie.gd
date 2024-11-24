@@ -22,6 +22,6 @@ func _process(delta):
 			queue_free();
 			
 			ANT_CONTROLLER.cookie_count += 1;
-			UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
+			UI_CONTROLLER.get_children()[0].text = "Galletas:\n" + str(ANT_CONTROLLER.cookie_count);
 	else:
 		outline_shader_reference.set_shader_parameter("outline_width", 0);
