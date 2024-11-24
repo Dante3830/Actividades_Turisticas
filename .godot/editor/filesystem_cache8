@@ -1,8 +1,8 @@
 ea4bc82a6ad023ab7ee23ee620429895
-::res://::1732406811
+::res://::1732407083
 export_presets.cfg::TextFile::-1::1732339782::0::1::::<><>::
 icon.svg::CompressedTexture2D::6884001286068589567::1732318250::1732388521::1::::<><>::
-Main.tscn::PackedScene::8993337544243084828::1732385373::0::1::::<><>::uid://kq4ejyxsirbk::::res://Assets/BarrelAndBox/BarrelAndBox.fbx<>uid://dmb34xed8iwxo::::res://Scenes/Player.tscn
+Main.tscn::PackedScene::8993337544243084828::1732407083::0::1::::<><>::
 main_scene.tscn::PackedScene::3479299321904193136::1732405644::0::1::::<><>::res://code/ant_controller.gd<>res://code/camera_controller.gd<>res://shaders/circle.gdshader
 README.md::TextFile::-1::1732388137::0::1::::<><>::
 ::res://code/::1732330564
