@@ -50,7 +50,7 @@ func _ready():
 	current_speed    = max_walk_speed;
 	target_direction = ANT_CONTROLLER.rotation;
 	
-	UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
+	UI_CONTROLLER.get_children()[0].text = "Galletas:\n" + str(ANT_CONTROLLER.cookie_count);
 	
 	stored_gravity = ANT_CONTROLLER.gravity;
 	AUDIO_CONTROLLER.play();
@@ -70,7 +70,7 @@ func _process(delta: float):
 	
 	if Input.is_action_pressed("hack"):
 		cookie_count += 1;
-		UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
+		UI_CONTROLLER.get_children()[0].text = "Galletas:\n" + str(ANT_CONTROLLER.cookie_count);
 	
 	
 	if Input.is_action_just_pressed("game_pickup"):
@@ -113,7 +113,7 @@ func _process(delta: float):
 		
 		if ANT_CONTROLLER.cookie_count > 0:
 			ANT_CONTROLLER.cookie_count-=1;
-			UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
+			UI_CONTROLLER.get_children()[0].text = "Galletas:\n" + str(ANT_CONTROLLER.cookie_count);
 			
 			var instance = cookie.instantiate();
 			COOKIE_POOL.add_child(instance);
