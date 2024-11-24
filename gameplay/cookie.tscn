@@ -16,9 +16,8 @@ albedo_color = Color(0.233173, 0.68487, 1, 1)
 
 [sub_resource type="TorusMesh" id="TorusMesh_054an"]
 
-[sub_resource type="CylinderShape3D" id="CylinderShape3D_7jomp"]
-height = 0.0887956
-radius = 0.107071
+[sub_resource type="BoxShape3D" id="BoxShape3D_l8pp4"]
+size = Vector3(0.212402, 0.0784302, 0.191956)
 
 [node name="cookie" type="RigidBody3D"]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.66071, 0, -0.420867)
@@ -30,4 +29,5 @@ material_override = SubResource("StandardMaterial3D_3ov0k")
 mesh = SubResource("TorusMesh_054an")
 
 [node name="CollisionShape3D" type="CollisionShape3D" parent="."]
-shape = SubResource("CylinderShape3D_7jomp")
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00317383, 0.00515747, -0.0069885)
+shape = SubResource("BoxShape3D_l8pp4")

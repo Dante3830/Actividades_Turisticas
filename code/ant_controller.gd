@@ -15,12 +15,15 @@ var gravity = ProjectSettings.get_setting("physics/3d/default_gravity")
 
 @onready var COOKIE_POOL: Node3D = $"/root/main_scene/gameplay/cookie_pool"
 
-var max_walk_speed: float = 4.5;
-var max_back_speed: float = 2.5;
-var max_side_speed: float = 3.0;
+@onready var ANIMATION_TREE: AnimationTree      = $"/root/main_scene/ant_controller/model/AnimationTree"
+@onready var ANIMATION_PLAYER: AnimationPlayer  = $"/root/main_scene/ant_controller/model/AnimationPlayer"
+
+var max_walk_speed: float = 40.0;
+var max_back_speed: float = 20.0;
+var max_side_speed: float = 35.0;
 var max_jump_power: float = 2.5;
 
-var max_run_power:  float = 2.0;
+var max_run_power:  float = 200.0;
 
 var current_speed:  float;
 var current_jump:   int;
@@ -33,6 +36,7 @@ var ignore_movement: bool = false;
 
 # @NOTE(Liman1): Cookie Clicker!
 var cookie_count: int = 99;
+var stored_gravity: float;
 
 func _ready():
 	Input.set_mouse_mode(Input.MOUSE_MODE_CAPTURED);
@@ -40,6 +44,8 @@ func _ready():
 	target_direction = ANT_CONTROLLER.rotation;
 	
 	UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
+	
+	stored_gravity = ANT_CONTROLLER.gravity;
 
 func _process(delta: float):
 	if Input.is_action_just_pressed("game_drop"):
@@ -95,11 +101,19 @@ func _physics_process(delta):
 		ANT_CONTROLLER.velocity.y -= gravity * delta;
 	else: 
 		current_jump = 2;
+		ANT_CONTROLLER.gravity = stored_gravity;
 	
 	if Input.is_action_just_pressed("move_jump"):
 		if current_jump > 0:
 			current_jump -= 1;
 			ANT_CONTROLLER.velocity += Vector3.UP * max_jump_power;
+	
+	if ANT_CONTROLLER.velocity.y < 0 && current_jump == 0:
+		ANT_CONTROLLER.gravity = stored_gravity * 0.25;
+	
+	ANIMATION_TREE["parameters/movements/conditions/land"] =  is_on_floor();
+	ANIMATION_TREE["parameters/movements/conditions/fall"] = !is_on_floor();
+	ANIMATION_TREE["parameters/movements/idle_to_fall/blend_position"] = ANT_CONTROLLER.velocity.y;
 	
 	if do_move:
 		var camera_yaw = CAMERA_MOUNT.rotation.y;
@@ -113,5 +127,9 @@ func _physics_process(delta):
 		var facing_direction = ANT_CONTROLLER.get_children()[0].transform.basis.z;
 		
 		ANT_CONTROLLER.move_and_collide(facing_direction.rotated(Vector3.UP, velocity.angle()) * move);
+		
+		ANIMATION_TREE["parameters/movements/idle_to_walk/blend_position"] = move;
+	else:
+		ANIMATION_TREE["parameters/movements/idle_to_walk/blend_position"] = 0;
 	
 	move_and_slide()
