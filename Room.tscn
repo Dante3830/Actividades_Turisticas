@@ -1,4 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://bi0iqtdtkrum7"]
+[gd_scene load_steps=14 format=3 uid="uid://bi0iqtdtkrum7"]
 
 [ext_resource type="VoxelGIData" uid="uid://heuyusb5qr8j" path="res://Room.VoxelGI_data.res" id="1_r86ac"]
 [ext_resource type="Material" uid="uid://ougmddg7ra7s" path="res://shaders/ilumination_material.tres" id="2_h8kik"]
@@ -21,6 +21,23 @@ size = Vector3(300, 1, 180)
 [sub_resource type="PlaneMesh" id="PlaneMesh_jfg06"]
 size = Vector2(300, 180)
 
+[sub_resource type="BoxMesh" id="BoxMesh_cl2s8"]
+size = Vector3(100, 350, 10)
+
+[sub_resource type="BoxMesh" id="BoxMesh_do4bp"]
+size = Vector3(200, 200, 100)
+
+[sub_resource type="BoxMesh" id="BoxMesh_gl46p"]
+size = Vector3(100, 80, 100)
+
+[sub_resource type="CylinderMesh" id="CylinderMesh_n3roy"]
+top_radius = 10.0
+bottom_radius = 10.0
+height = 100.0
+
+[sub_resource type="BoxMesh" id="BoxMesh_yr1ds"]
+size = Vector3(100, 5, 100)
+
 [node name="Room" type="Node3D"]
 
 [node name="WorldEnvironment" type="WorldEnvironment" parent="."]
@@ -31,60 +48,82 @@ transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -3.36343, 14.0852, -81.5198)
 size = Vector3(1085.14, 542.677, 631.818)
 data = ExtResource("1_r86ac")
 
-[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+[node name="Light" type="MeshInstance3D" parent="."]
 transform = Transform3D(0.994977, 0, -0.100101, 0, 1, 0, 0.100101, 0, 0.994977, -71.3368, 133.401, -5.40816)
 mesh = SubResource("CapsuleMesh_r8vfe")
 
-[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
+[node name="Walls" type="Node3D" parent="."]
+visible = false
 
-[node name="Walls" type="Node3D" parent="CSGCombiner3D"]
-
-[node name="Wall1" type="MeshInstance3D" parent="CSGCombiner3D/Walls"]
+[node name="Wall1" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, 18.4007, -340.023)
 mesh = SubResource("BoxMesh_kw80l")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 
-[node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D/Walls/Wall1"]
-transform = Transform3D(0.279747, 0, 0, 0, 0.244339, 0, 0, 0, 0.295719, -23.1139, -4.49601, 100.551)
-size = Vector3(300, 110, 1)
-
-[node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-
-[node name="Wall2" type="MeshInstance3D" parent="CSGCombiner3D/Walls/CSGBox3D2"]
-transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, 18.4007, 216.13)
-mesh = SubResource("BoxMesh_kw80l")
-skeleton = NodePath("../../../..")
-
-[node name="CSGBox3D3" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-
-[node name="Wall3" type="MeshInstance3D" parent="CSGCombiner3D/Walls/CSGBox3D3"]
+[node name="Wall3" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, -521.566, 27.3437, -48.0674)
 mesh = SubResource("BoxMesh_g7ut3")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../..")
 
-[node name="CSGBox3D4" type="CSGBox3D" parent="CSGCombiner3D/Walls"]
-
-[node name="Wall4" type="MeshInstance3D" parent="CSGCombiner3D/Walls/CSGBox3D4"]
+[node name="Wall4" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 501.011, 27.3437, -48.0674)
 mesh = SubResource("BoxMesh_g7ut3")
-skeleton = NodePath("../../../..")
+skeleton = NodePath("../..")
 
-[node name="Ceiling" type="MeshInstance3D" parent="CSGCombiner3D/Walls"]
+[node name="Ceiling" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 5.21428, 241.43, -46.1079)
+visible = false
 mesh = SubResource("BoxMesh_v2yul")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
 
-[node name="Floor" type="MeshInstance3D" parent="CSGCombiner3D/Walls"]
+[node name="Floor" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, -192.094, -50.4336)
 mesh = SubResource("PlaneMesh_jfg06")
-skeleton = NodePath("../../..")
+skeleton = NodePath("../..")
+
+[node name="CSGCombiner3D" type="CSGCombiner3D" parent="."]
 
 [node name="CSGBox3D" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -28.3965, 9.25956, 213.802)
-operation = 2
-size = Vector3(150, 100, 13.6281)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -192.389, 9.25956, 254.02)
+operation = 1
+size = Vector3(150, 100, 116.785)
 
 [node name="CSGBox3D2" type="CSGBox3D" parent="CSGCombiner3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0, 79.0244)
-operation = 2
-size = Vector3(100, 100, 100)
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -13.3915, 18.904, 215.379)
+size = Vector3(1040.81, 456.663, 16.2231)
+
+[node name="Slide" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 0.486107, -0.8739, 0, 0.8739, 0.486107, -447.485, -98.7896, 53.4468)
+mesh = SubResource("BoxMesh_cl2s8")
+
+[node name="Furniture" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -261.873, -92.9777, 164.909)
+mesh = SubResource("BoxMesh_do4bp")
+
+[node name="Box1" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -151.603, 156.982)
+mesh = SubResource("BoxMesh_gl46p")
+
+[node name="Box2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 33.3268, -71.9824, 156.982)
+mesh = SubResource("BoxMesh_gl46p")
+
+[node name="Box3" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 75.262, 7.6848, 156.982)
+mesh = SubResource("BoxMesh_gl46p")
+
+[node name="Box4" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 110.978, -151.538, 156.982)
+mesh = SubResource("BoxMesh_gl46p")
+
+[node name="Cilinter" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.00977374, 0.999952, 0, -0.999952, -0.00977374, 203.803, 103.706, 164.959)
+mesh = SubResource("CylinderMesh_n3roy")
+
+[node name="Cilinter2" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, -0.00977374, 0.999952, 0, -0.999952, -0.00977374, 265.842, 138.59, 164.959)
+mesh = SubResource("CylinderMesh_n3roy")
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 402.727, 147.799, 171.183)
+mesh = SubResource("BoxMesh_yr1ds")
