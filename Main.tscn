@@ -1,7 +1,4 @@
-[gd_scene load_steps=9 format=3 uid="uid://d1eo7qppu2wee"]
-
-[ext_resource type="PackedScene" uid="uid://kq4ejyxsirbk" path="res://Assets/BarrelAndBox/BarrelAndBox.fbx" id="1_2orqt"]
-[ext_resource type="PackedScene" uid="uid://dmb34xed8iwxo" path="res://Scenes/Player.tscn" id="2_awlkp"]
+[gd_scene load_steps=7 format=3 uid="uid://d1eo7qppu2wee"]
 
 [sub_resource type="BoxMesh" id="BoxMesh_kw80l"]
 size = Vector3(300, 110, 1)
@@ -20,39 +17,36 @@ size = Vector3(10, 10, 10)
 
 [sub_resource type="BoxMesh" id="BoxMesh_fh6rp"]
 
-[node name="Main" type="Node3D"]
+[node name="Room" type="Node3D"]
 
-[node name="BarrelAndBox" parent="." instance=ExtResource("1_2orqt")]
-transform = Transform3D(150, 0, 0, 0, 150, 0, 0, 0, 150, -193.531, -187.841, -261.26)
+[node name="Walls" type="Node3D" parent="."]
 
-[node name="Room" type="Node3D" parent="."]
-
-[node name="Wall1" type="MeshInstance3D" parent="Room"]
+[node name="Wall1" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, 18.4007, -340.023)
 mesh = SubResource("BoxMesh_kw80l")
 skeleton = NodePath("../..")
 
-[node name="Wall2" type="MeshInstance3D" parent="Room"]
+[node name="Wall2" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, 18.4007, 216.13)
 mesh = SubResource("BoxMesh_kw80l")
 skeleton = NodePath("../..")
 
-[node name="Wall3" type="MeshInstance3D" parent="Room"]
+[node name="Wall3" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, -521.566, 27.3437, -48.0674)
 mesh = SubResource("BoxMesh_g7ut3")
 skeleton = NodePath("../..")
 
-[node name="Wall4" type="MeshInstance3D" parent="Room"]
+[node name="Wall4" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 501.011, 27.3437, -48.0674)
 mesh = SubResource("BoxMesh_g7ut3")
 skeleton = NodePath("../..")
 
-[node name="Ceiling" type="MeshInstance3D" parent="Room"]
+[node name="Ceiling" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 5.21428, 241.43, -46.1079)
 mesh = SubResource("BoxMesh_v2yul")
 skeleton = NodePath("../..")
 
-[node name="Floor" type="MeshInstance3D" parent="Room"]
+[node name="Floor" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, -192.094, -50.4336)
 mesh = SubResource("PlaneMesh_jfg06")
 skeleton = NodePath("../..")
@@ -70,6 +64,3 @@ spot_angle = 44.7736
 [node name="MeshInstance3D" type="MeshInstance3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 23.0048, -20.343)
 mesh = SubResource("BoxMesh_fh6rp")
-
-[node name="Player" parent="." instance=ExtResource("2_awlkp")]
-transform = Transform3D(20, 0, 0, 0, 20, 0, 0, 0, 20, 0, -171.029, 0)
