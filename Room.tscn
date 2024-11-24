@@ -53,7 +53,6 @@ transform = Transform3D(0.994977, 0, -0.100101, 0, 1, 0, 0.100101, 0, 0.994977, 
 mesh = SubResource("CapsuleMesh_r8vfe")
 
 [node name="Walls" type="Node3D" parent="."]
-visible = false
 
 [node name="Wall1" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 2.87785, 18.4007, -340.023)
@@ -72,7 +71,6 @@ skeleton = NodePath("../..")
 
 [node name="Ceiling" type="MeshInstance3D" parent="Walls"]
 transform = Transform3D(3.57466, 0, 0, 0, 4.09267, 0, 0, 0, 3.38159, 5.21428, 241.43, -46.1079)
-visible = false
 mesh = SubResource("BoxMesh_v2yul")
 skeleton = NodePath("../..")
 

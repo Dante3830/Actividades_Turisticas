@@ -1,4 +1,3 @@
-res://Main.tscn
 res://Room.tscn
+res://shaders/circle.gdshader
 res://shaders/ilumination_material.tres
-res://Room.VoxelGI_data.res
