@@ -1,2 +1,4 @@
-res://gameplay/cookie.tscn::65f4e62bd57bd5ef865b49d04a3d39c8::1732339422::res://.godot/exported/133200997/export-46002aca2f6a105f86abaec5c5f8afe0-cookie.scn
-res://main_scene.tscn::5dd9c36a522a4acee9cf0dfb6cf2e400::1732339765::res://.godot/exported/133200997/export-fac9db9380da720a7609154e1ecab771-main_scene.scn
+res://gameplay/cookie.tscn::a668cffef2218df5d17c9055fff748e6::1732416938::res://.godot/exported/133200997/export-46002aca2f6a105f86abaec5c5f8afe0-cookie.scn
+res://main_scene.tscn::083f95a935f5e00a1f781822d5166717::1732420325::res://.godot/exported/133200997/export-fac9db9380da720a7609154e1ecab771-main_scene.scn
+res://gameplay/ant_controller.tscn::d35ee7f0163d275858e8a48620d0c42d::1732416938::res://.godot/exported/133200997/export-a95630d0dc6f100ef55a2d08471d348a-ant_controller.scn
+res://gameplay/bot_ant.tscn::1e56413cc468fe7dd1dc51b97602edc1::1732416938::res://.godot/exported/133200997/export-3228a8734f2080a2e08d772edd26841f-bot_ant.scn
