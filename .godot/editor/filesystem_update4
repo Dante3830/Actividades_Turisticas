@@ -1,3 +1,11 @@
-res://Room.tscn
+res://main_scene.tscn
+res://shaders/outline.gdshader
 res://shaders/circle.gdshader
-res://shaders/ilumination_material.tres
+res://gameplay/bot_ant.tscn
+res://gameplay/ant_controller.tscn
+res://code/ant_controller.gd
+res://ui/pause.tscn
+res://code/pause.gd
+res://ui/menu.tscn
+res://code/bot_ant.gd
+res://code/nest_controller.gd

@@ -1,0 +1,60 @@
+[gd_scene load_steps=3 format=3 uid="uid://cv10fetsghija"]
+
+[ext_resource type="Script" path="res://code/options.gd" id="1_gsnwx"]
+
+[sub_resource type="LabelSettings" id="LabelSettings_3r8k8"]
+outline_size = 5
+outline_color = Color(0, 0, 0, 1)
+
+[node name="Options" type="Control"]
+layout_mode = 3
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_gsnwx")
+
+[node name="VBoxContainer" type="VBoxContainer" parent="."]
+layout_mode = 1
+anchors_preset = 8
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -119.5
+offset_top = -63.5
+offset_right = 119.5
+offset_bottom = 63.5
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="Label" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Movimiento: WASD"
+label_settings = SubResource("LabelSettings_3r8k8")
+
+[node name="Label2" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Saltar: Espacio"
+label_settings = SubResource("LabelSettings_3r8k8")
+
+[node name="Label3" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Empujar / Recoger Comida: E"
+label_settings = SubResource("LabelSettings_3r8k8")
+
+[node name="Label4" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+text = "Colocar Comida: F"
+label_settings = SubResource("LabelSettings_3r8k8")
+
+[node name="Label5" type="Label" parent="VBoxContainer"]
+layout_mode = 2
+label_settings = SubResource("LabelSettings_3r8k8")
+
+[node name="back" type="Button" parent="VBoxContainer"]
+layout_mode = 2
+text = "Cerrar"
+
+[connection signal="pressed" from="VBoxContainer/back" to="." method="_on_back_pressed"]
