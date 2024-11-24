@@ -1,6 +1,6 @@
 extends Node3D
 
-const ant_controller    = preload("res://code/ant_controller.gd");
+const ant_controller = preload("res://code/ant_controller.gd");
 
 const can_interact_max_distance = 0.5;
 const outline_width = 1.5;
@@ -11,8 +11,7 @@ const outline_width = 1.5;
 func _ready():
 	pass
 
-func _physics_process(delta):
-	
+func _process(delta):
 	var outline_shader_reference = get_children()[0].material_override.next_pass;
 	
 	var distance = position.distance_to(ANT_CONTROLLER.position);
@@ -24,6 +23,5 @@ func _physics_process(delta):
 			
 			ANT_CONTROLLER.cookie_count += 1;
 			UI_CONTROLLER.get_children()[0].text = "x" + str(ANT_CONTROLLER.cookie_count);
-		
 	else:
 		outline_shader_reference.set_shader_parameter("outline_width", 0);

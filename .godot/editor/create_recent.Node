@@ -1,0 +1,14 @@
+Node3D
+RigidBody3D
+CollisionShape3D
+MeshInstance3D
+MultiMeshInstance3D
+NavigationAgent3D
+CharacterBody3D
+NavigationRegion3D
+Panel
+Control
+Label
+DirectionalLight3D
+MultiMeshInstance2D
+Path3D

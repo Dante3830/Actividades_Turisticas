@@ -23,11 +23,11 @@ var last_mouse_motion: Vector2;
 var camera_angles: Vector2;
 
 func _ready():
-	body_height_offset   = 1.5;
-	angle_around_player  = 0;
-	distance_from_player = 3.5;
-	
+	body_height_offset    = 1.5;
+	angle_around_player   = 0;
 	on_shoulders_position = CAMERA_CONTROLLER.position;
+	
+	distance_from_player = ANT_CONTROLLER.global_position.distance_to(CAMERA_CONTROLLER.global_position);
 
 func _physics_process(delta):
 	CAMERA_MOUNT.rotation.x = deg_to_rad(camera_angles.x);
@@ -45,14 +45,14 @@ func _physics_process(delta):
 	CAMERA_CONTROLLER.position = on_shoulders_position;
 	
 	# @NOTE(Liman1): Temporary ignore collisions.
-	return;
+	# return;
 	
 	if(!result):
 		normal_offset = Vector3(0, 0, 0);
 		CAMERA_CONTROLLER.position = on_shoulders_position;
 	else:
-		#normal_offset = result.normal * 0.1;
-		normal_offset = Vector3(0, 0, 0);
+		normal_offset = result.normal * 0.05;
+		#normal_offset = Vector3(0, 0, 0);
 		CAMERA_CONTROLLER.global_position = result.position + normal_offset;
 	
 	return;

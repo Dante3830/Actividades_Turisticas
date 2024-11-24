@@ -1,0 +1,33 @@
+[gd_scene load_steps=5 format=3 uid="uid://bbuunqr87xlcu"]
+
+[ext_resource type="Script" path="res://code/bot_ant.gd" id="1_wf52i"]
+
+[sub_resource type="TubeTrailMesh" id="TubeTrailMesh_fhvx2"]
+
+[sub_resource type="SphereMesh" id="SphereMesh_wlegd"]
+
+[sub_resource type="CapsuleShape3D" id="CapsuleShape3D_ltrrm"]
+radius = 0.129879
+height = 0.4543
+
+[node name="bot_ant" type="CharacterBody3D"]
+script = ExtResource("1_wf52i")
+
+[node name="model" type="Node3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.13119, 0)
+
+[node name="MeshInstance3D" type="MeshInstance3D" parent="model"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
+mesh = SubResource("TubeTrailMesh_fhvx2")
+skeleton = NodePath("../..")
+
+[node name="MeshInstance3D2" type="MeshInstance3D" parent="model"]
+transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, -0.0217082, 0.175212, -0.020031)
+mesh = SubResource("SphereMesh_wlegd")
+skeleton = NodePath("../MeshInstance3D")
+
+[node name="CollisionShape3D" type="CollisionShape3D" parent="."]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.198329, 0)
+shape = SubResource("CapsuleShape3D_ltrrm")
+
+[node name="NavigationAgent3D" type="NavigationAgent3D" parent="."]

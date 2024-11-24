@@ -1,2 +1,11 @@
-res://Main.tscn
-res://Room.tscn
+res://main_scene.tscn
+res://shaders/circle.gdshader
+res://shaders/outline.gdshader
+res://code/ant_controller.gd
+res://code/cookie.gd
+res://gameplay/cookie.tscn
+res://gameplay/ant.tscn
+res://code/nest_controller.gd
+res://gameplay/bot_ant.tscn
+res://code/camera_controller.gd
+res://code/bot_ant.gd

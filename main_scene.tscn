@@ -1,12 +1,13 @@
-[gd_scene load_steps=17 format=3 uid="uid://bptns0se84edc"]
+[gd_scene load_steps=18 format=3 uid="uid://bptns0se84edc"]
 
 [ext_resource type="Script" path="res://code/ant_controller.gd" id="1_d1h1o"]
 [ext_resource type="Script" path="res://code/camera_controller.gd" id="2_6ep8s"]
-[ext_resource type="Shader" path="res://shaders/circle.gdshader" id="3_ccg6r"]
+[ext_resource type="Script" path="res://code/nest_controller.gd" id="3_jvaob"]
+[ext_resource type="PackedScene" uid="uid://bkr2bq1l3qpe8" path="res://gameplay/cookie.tscn" id="4_0t6em"]
 
-[sub_resource type="BoxMesh" id="BoxMesh_6q1tp"]
-
-[sub_resource type="BoxShape3D" id="BoxShape3D_hrtb5"]
+[sub_resource type="NavigationMesh" id="NavigationMesh_7l038"]
+vertices = PackedVector3Array(-3.83451, 0.240831, 0.50289, -0.834514, 0.240831, 0.50289, -0.584514, 0.240831, -0.49711, -3.83451, 0.240831, -4.24711, 1.16549, 0.240831, -0.49711, 5.16549, 0.240831, -0.74711, 5.16549, 0.240831, -4.24711, -0.584514, 0.240831, 1.75289, -3.83451, 0.240831, 4.75289, 1.16549, 0.240831, 1.75289, 5.16549, 0.240831, 4.75289)
+polygons = [PackedInt32Array(1, 0, 2), PackedInt32Array(2, 0, 3), PackedInt32Array(4, 2, 5), PackedInt32Array(5, 2, 6), PackedInt32Array(6, 2, 3), PackedInt32Array(1, 7, 0), PackedInt32Array(0, 7, 8), PackedInt32Array(7, 9, 8), PackedInt32Array(8, 9, 10), PackedInt32Array(4, 5, 9), PackedInt32Array(9, 5, 10)]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_2kiuc"]
 albedo_color = Color(0.369107, 0.369107, 0.369107, 1)
@@ -14,12 +15,18 @@ albedo_color = Color(0.369107, 0.369107, 0.369107, 1)
 [sub_resource type="PlaneMesh" id="PlaneMesh_l1pkv"]
 
 [sub_resource type="BoxShape3D" id="BoxShape3D_b2bj7"]
-size = Vector3(2.00098, 0.500061, 1.8938)
+size = Vector3(2.00098, 0.0156555, 1.8938)
+
+[sub_resource type="BoxMesh" id="BoxMesh_3l1qx"]
+
+[sub_resource type="BoxShape3D" id="BoxShape3D_g1wh2"]
 
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_axhwq"]
 albedo_color = Color(0, 0, 0, 1)
 
 [sub_resource type="CapsuleMesh" id="CapsuleMesh_kkor4"]
+
+[sub_resource type="StandardMaterial3D" id="StandardMaterial3D_fj67a"]
 
 [sub_resource type="CapsuleShape3D" id="CapsuleShape3D_afwcf"]
 radius = 0.125
@@ -30,76 +37,63 @@ height = 0.5
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_djw4g"]
 albedo_color = Color(1, 0.243137, 1, 1)
 
-[sub_resource type="ShaderMaterial" id="ShaderMaterial_mqk8u"]
-render_priority = 0
-shader = ExtResource("3_ccg6r")
-shader_parameter/color = Vector4(1, 1, 0, 1)
-shader_parameter/diameter = 1.0
-shader_parameter/thickness = 0.01
-shader_parameter/frequency = 10.0
-shader_parameter/phase = 0.0
-
-[sub_resource type="PlaneMesh" id="PlaneMesh_ao37j"]
-
 [sub_resource type="StandardMaterial3D" id="StandardMaterial3D_kbaf2"]
-albedo_color = Color(0.241156, 0.241156, 0.241156, 1)
+albedo_color = Color(0.0997663, 0, 0.724283, 1)
 
 [node name="main_scene" type="Node3D"]
 
-[node name="lighting" type="Node3D" parent="."]
+[node name="DEBUG_lighting" type="Node3D" parent="."]
 
-[node name="DirectionalLight3D" type="DirectionalLight3D" parent="lighting"]
+[node name="DirectionalLight3D" type="DirectionalLight3D" parent="DEBUG_lighting"]
 transform = Transform3D(1, 0, 0, 0, 0.229132, 0.973395, 0, -0.973395, 0.229132, 0, 0, 0)
 shadow_enabled = true
 
-[node name="simple_map" type="MeshInstance3D" parent="."]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.01803, 0.396966, -1.67695)
-mesh = SubResource("BoxMesh_6q1tp")
-skeleton = NodePath("")
+[node name="DEBUG_simple_map" type="Node3D" parent="."]
 
-[node name="MeshInstance3D2" type="MeshInstance3D" parent="simple_map"]
-transform = Transform3D(0.810788, 0, 0.58534, 0, 1, 0, -0.58534, 0, 0.810788, 0.142244, 0.0362451, 3.4714)
-mesh = SubResource("BoxMesh_6q1tp")
-skeleton = NodePath("../OmniLight3D")
+[node name="NavigationRegion3D" type="NavigationRegion3D" parent="DEBUG_simple_map"]
+navigation_mesh = SubResource("NavigationMesh_7l038")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="simple_map/MeshInstance3D2"]
-
-[node name="CollisionShape3D" type="CollisionShape3D" parent="simple_map/MeshInstance3D2/RigidBody3D"]
-shape = SubResource("BoxShape3D_hrtb5")
-
-[node name="MeshInstance3D" type="MeshInstance3D" parent="simple_map"]
-transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, -0.352544, -0.396966, 1.92984)
+[node name="plane" type="MeshInstance3D" parent="DEBUG_simple_map/NavigationRegion3D"]
+transform = Transform3D(5, 0, 0, 0, 5, 0, 0, 0, 5, 0.665486, 0.202764, 0.25289)
 material_override = SubResource("StandardMaterial3D_2kiuc")
 mesh = SubResource("PlaneMesh_l1pkv")
-skeleton = NodePath("../..")
+skeleton = NodePath("../../..")
 
-[node name="RigidBody3D" type="RigidBody3D" parent="simple_map/MeshInstance3D"]
+[node name="RigidBody3D" type="RigidBody3D" parent="DEBUG_simple_map/NavigationRegion3D/plane"]
 lock_rotation = true
 freeze = true
 
-[node name="CollisionShape3D" type="CollisionShape3D" parent="simple_map/MeshInstance3D/RigidBody3D"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00244141, -0.249969, 0.0372314)
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DEBUG_simple_map/NavigationRegion3D/plane/RigidBody3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -0.00244141, -0.00776627, 0.0372314)
 shape = SubResource("BoxShape3D_b2bj7")
 
-[node name="MeshInstance3D3" type="MeshInstance3D" parent="simple_map"]
-transform = Transform3D(0.314755, 0, 0.949173, 0, 1, 0, -0.949173, 0, 0.314755, -1.52433, -0.0636948, 1.14815)
-mesh = SubResource("BoxMesh_6q1tp")
-skeleton = NodePath("../OmniLight3D")
+[node name="MeshInstance3D" type="MeshInstance3D" parent="DEBUG_simple_map/NavigationRegion3D"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.288483, 0.513702, 0.610519)
+mesh = SubResource("BoxMesh_3l1qx")
 
-[node name="MeshInstance3D4" type="MeshInstance3D" parent="simple_map"]
-transform = Transform3D(-0.130338, 0, 0.518153, 0, 0.268138, 0, -0.203218, 0, -0.332329, -0.706729, 0.407323, 0.656072)
-mesh = SubResource("BoxMesh_6q1tp")
-skeleton = NodePath("../OmniLight3D")
+[node name="RigidBody3D" type="RigidBody3D" parent="DEBUG_simple_map/NavigationRegion3D/MeshInstance3D"]
+freeze = true
 
-[node name="ant_controller" type="RigidBody3D" parent="."]
+[node name="CollisionShape3D" type="CollisionShape3D" parent="DEBUG_simple_map/NavigationRegion3D/MeshInstance3D/RigidBody3D"]
+shape = SubResource("BoxShape3D_g1wh2")
+
+[node name="ant_controller" type="CharacterBody3D" parent="."]
 transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.38589, 1.42755, 1.69639)
-lock_rotation = true
 script = ExtResource("1_d1h1o")
 
 [node name="model" type="MeshInstance3D" parent="ant_controller"]
 transform = Transform3D(0.25, 0, 0, 0, 0.25, 0, 0, 0, 0.25, 0, 0, 0)
 material_override = SubResource("StandardMaterial3D_axhwq")
 mesh = SubResource("CapsuleMesh_kkor4")
+
+[node name="ground_point" type="Node3D" parent="ant_controller/model"]
+transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, -0.8, 1.10162)
+
+[node name="eye" type="MeshInstance3D" parent="ant_controller/model"]
+transform = Transform3D(1, 0, 0, 0, 0.296393, 0, 0, 0, 1, 0.0115538, 0.300916, 0.132847)
+material_override = SubResource("StandardMaterial3D_fj67a")
+mesh = SubResource("CapsuleMesh_kkor4")
+skeleton = NodePath("../..")
 
 [node name="camera_mount_controller" type="Node3D" parent="ant_controller"]
 transform = Transform3D(4, 0, 0, 0, 4, 0, 0, 0, 4, 0, 0, 0)
@@ -111,30 +105,36 @@ script = ExtResource("2_6ep8s")
 [node name="CollisionShape3D" type="CollisionShape3D" parent="ant_controller"]
 shape = SubResource("CapsuleShape3D_afwcf")
 
-[node name="ground_point" type="Node3D" parent="ant_controller"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, -0.2, 0)
-
 [node name="gameplay" type="Node3D" parent="."]
 
-[node name="paradise" type="Node3D" parent="gameplay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, -2.81725, -1.19209e-07, 2.8864)
+[node name="paradise_pool" type="Node3D" parent="gameplay"]
 
-[node name="model" type="MeshInstance3D" parent="gameplay/paradise"]
-transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+[node name="tele" type="MeshInstance3D" parent="gameplay/paradise_pool"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, -1.08631, 0.341385, 0.357073)
 mesh = SubResource("SphereMesh_vsupr")
 surface_material_override/0 = SubResource("StandardMaterial3D_djw4g")
 
-[node name="interest_radius" type="MeshInstance3D" parent="gameplay/paradise"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0, 0.005, 0)
-material_override = SubResource("ShaderMaterial_mqk8u")
-cast_shadow = 0
-mesh = SubResource("PlaneMesh_ao37j")
-skeleton = NodePath("../../nest")
+[node name="cookie_pool" type="Node3D" parent="gameplay"]
 
-[node name="nest" type="Node3D" parent="gameplay"]
-transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82026, 2.38419e-07, 0.870746)
+[node name="cookie" parent="gameplay/cookie_pool" instance=ExtResource("4_0t6em")]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 0.80987, 1.08076, 1.73883)
 
-[node name="model" type="MeshInstance3D" parent="gameplay/nest"]
+[node name="nest_pool" type="Node3D" parent="gameplay"]
+
+[node name="nest2" type="Node3D" parent="gameplay/nest_pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82026, 0.56637, -2.12265)
+script = ExtResource("3_jvaob")
+
+[node name="model" type="MeshInstance3D" parent="gameplay/nest_pool/nest2"]
+transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
+mesh = SubResource("SphereMesh_vsupr")
+surface_material_override/0 = SubResource("StandardMaterial3D_kbaf2")
+
+[node name="nest" type="Node3D" parent="gameplay/nest_pool"]
+transform = Transform3D(1, 0, 0, 0, 1, 0, 0, 0, 1, 1.82026, 0.56637, 2.99017)
+script = ExtResource("3_jvaob")
+
+[node name="model" type="MeshInstance3D" parent="gameplay/nest_pool/nest"]
 transform = Transform3D(0.5, 0, 0, 0, 0.5, 0, 0, 0, 0.5, 0, 0, 0)
 mesh = SubResource("SphereMesh_vsupr")
 surface_material_override/0 = SubResource("StandardMaterial3D_kbaf2")
